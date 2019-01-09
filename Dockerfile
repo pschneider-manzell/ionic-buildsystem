@@ -8,6 +8,9 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update \
     && apt-get install -y curl \
     && apt-get install -y git \
+    && apt-get install -y openjdk-8-jdk \
+    && apt-get install -y ca-certificates-java \
+    && rm -rf /var/cache/oracle-jdk8-installer \
     && apt-get -y autoclean \
     && apt-get --assume-yes install bzip2 \
     && apt-get --assume-yes install libfontconfig
@@ -18,6 +21,9 @@ ENV NVM_DIR /root/nvm
 ENV NODE_VERSION 8.9.4
 ENV IONIC_VERSION 3.20.0
 ENV CORDOVA_VERSION 8.0.0
+# Setup JAVA_HOME, this is useful for docker commandline
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
 
 
 # install nvm
@@ -44,4 +50,5 @@ RUN node -v
 RUN npm -v
 RUN cordova -v
 RUN ionic -v
+RUN java -version
 
