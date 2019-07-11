@@ -16,11 +16,12 @@ RUN apt-get update \
     && apt-get --assume-yes install libfontconfig
 
 # nvm environment variables
-ENV NVM_VERSION v0.33.8
+ENV NVM_VERSION v0.34.0
 ENV NVM_DIR /root/nvm
-ENV NODE_VERSION 8.9.4
-ENV IONIC_VERSION 3.20.0
-ENV CORDOVA_VERSION 8.0.0
+RUN mkdir $NVM_DIR
+ENV NODE_VERSION 10.16.0
+ENV IONIC_VERSION 4.12.0
+ENV CORDOVA_VERSION 8.1.2
 # Setup JAVA_HOME, this is useful for docker commandline
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
