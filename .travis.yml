@@ -3,12 +3,17 @@ dist: trusty
 
 jobs:
   include:
-    - stage: build docker image
+    - stage: "build docker image"
       script:
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker build -t travis-ci-build .
       - docker images
       - docker tag travis-ci-build $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build
-      - docker push $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build
-    - stage: test
-      script: docker run -it --rm $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build ionic start testApp blank --cordova --no-git --no-link
+    - stage: "test docker image"
+      script:
+      - docker run -it --rm $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build ionic start testApp blank --cordova --no-git --no-link
+    - stage: "upload docker image"
+      if: tag IS present
+      script:
+      - docker tag travis-ci-build $DOCKER_USERNAME/ionic-buildsystem:$TRAVIS_TAG
+      - docker push $DOCKER_USERNAME/ionic-buildsystem:$TRAVIS_TAG
