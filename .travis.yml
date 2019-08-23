@@ -10,6 +10,7 @@ jobs:
       - docker images
       - docker tag travis-ci-build $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build
     - stage: "test docker image"
+      script:
       - docker run -it --rm $DOCKER_USERNAME/ionic-buildsystem:travis-ci-build "ionic config set -g telemetry false && ionic start testApp blank --cordova --no-git --no-link --no-interactive"
     - stage: "upload docker image"
       if: tag IS present
