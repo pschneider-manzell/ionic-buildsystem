@@ -24,7 +24,7 @@ RUN apt-get clean
 ENV NVM_VERSION v0.39.1
 ENV NVM_DIR /root/nvm
 RUN mkdir $NVM_DIR
-ENV NODE_VERSION 10.16.0
+ENV NODE_VERSION 12.22.12
 ENV IONIC_VERSION 4.12.0
 ENV CORDOVA_VERSION 10.0.0
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
@@ -35,7 +35,7 @@ ADD sonar-scanner/4.7.0.2747 /sonar-scanner
 # update the repository sources list
 # and install dependencies
 # Setup JAVA_HOME, this is useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64
 RUN export JAVA_HOME
 
 
